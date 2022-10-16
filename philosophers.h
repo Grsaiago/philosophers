@@ -6,7 +6,7 @@
 /*   By: gsaiago <gsaiago@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 17:56:21 by gsaiago           #+#    #+#             */
-/*   Updated: 2022/10/14 19:47:09 by gsaiago          ###   ########.fr       */
+/*   Updated: 2022/10/16 17:10:10 by gsaiago          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,27 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <limits.h>
+# include <string.h>
 
 typedef struct s_philo
 {
-	int	phid;
-	int	forks;
-	int	prev_f;
-	int	next_f;
+	int				nph;
+	int				phid;
+	int				forks;
+	int				prev_f;
+	int				next_f;
+	int				*forkv;
+	pthread_mutex_t *mutexv;
 }	t_philo;
 
 typedef struct s_control
 {
-	int			forks;
-	int			nph;
-	int			*phidv;
-	pthread_t	*thv;
-	t_philo		**philov;
+	int					forks;
+	int					nph;
+	int					*forkv;
+	pthread_mutex_t		*mutexv;
+	pthread_t			*thv;
+	t_philo				**philov;
 }	t_control;
 
 #endif
