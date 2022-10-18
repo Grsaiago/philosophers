@@ -6,7 +6,7 @@
 /*   By: gsaiago <gsaiago@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 16:46:10 by gsaiago           #+#    #+#             */
-/*   Updated: 2022/10/16 19:09:05 by gsaiago          ###   ########.fr       */
+/*   Updated: 2022/10/17 22:57:39 by gsaiago          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@ t_philo	*create_thread_struct(t_control *control, int i)
 	philo->forkv = control->forkv;
 	philo->mutexv = control->mutexv;
 	philo->nph = control->nph;
+	philo->time_to_die = 500;
+	philo->time_to_eat = 500;
+	philo->time_to_sleep = 500;
 	philo->phid = i;
 	philo->forks = 0;
 	philo->prev_f = i - 1;
@@ -42,17 +45,24 @@ void	*thread_execute(void *ptr)
 	printf("Thread %d criada\n", philo->phid);
 	while(42)
 	{
-		pthread_mutex_lock(&philo->mutexv[philo->prev_f]);
-		printf("%d has taken a fork\n", philo->phid);
-		pthread_mutex_lock(&philo->mutexv[philo->next_f]);
+		if (philo->phid == philo->nph)
+		{
+			pthread_mutex_lock(&philo->mutexv[philo->prev_f]);
+			printf("%d has taken a fork\n", philo->phid);
+			pthread_mutex_lock(&philo->mutexv[philo->next_f]);
+		}
+		else 
+		{
+			pthread_mutex_lock(&philo->mutexv[philo->next_f]);
+			printf("%d has taken a fork\n", philo->phid);
+			pthread_mutex_lock(&philo->mutexv[philo->prev_f]);
+		}
 		printf("%d is eating\n", philo->phid);
-		usleep(150);
+		usleep(philo->time_to_eat);
 		pthread_mutex_unlock(&philo->mutexv[philo->prev_f]);
 		pthread_mutex_unlock(&philo->mutexv[philo->next_f]);
-		printf("%d is sleeping\n", philo->phid);
-		usleep(150);
-		printf("%d is eating\n", philo->phid);
-		usleep(150);
+		printf("%d is thinking\n", philo->phid);
+		usleep(500);
 	}
 	return (NULL);
 }

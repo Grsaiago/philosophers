@@ -6,7 +6,7 @@
 /*   By: gsaiago <gsaiago@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 17:56:21 by gsaiago           #+#    #+#             */
-/*   Updated: 2022/10/16 17:10:10 by gsaiago          ###   ########.fr       */
+/*   Updated: 2022/10/17 20:03:36 by gsaiago          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@ typedef struct s_philo
 	int				prev_f;
 	int				next_f;
 	int				*forkv;
+	int				time_to_die;
+	int				time_to_eat;
+	int				time_to_sleep;
 	pthread_mutex_t *mutexv;
 }	t_philo;
 
