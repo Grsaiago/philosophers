@@ -6,7 +6,7 @@
 /*   By: gsaiago <gsaiago@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:40:16 by gsaiago           #+#    #+#             */
-/*   Updated: 2022/10/20 19:53:57 by gsaiago          ###   ########.fr       */
+/*   Updated: 2022/10/20 20:04:02 by gsaiago          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void	dine(t_philo *philo)
 	while (42)
 	{
 		printf("%d is thinking\n",philo->phid);
-		usleep(150);
 		if (philo->phid == philo->nph)
 		{
 			pthread_mutex_lock(&philo->forkv[philo->prev_f]);
