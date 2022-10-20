@@ -6,7 +6,7 @@
 /*   By: gsaiago <gsaiago@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:38:57 by gsaiago           #+#    #+#             */
-/*   Updated: 2022/10/20 16:39:45 by gsaiago          ###   ########.fr       */
+/*   Updated: 2022/10/20 18:44:33 by gsaiago          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,7 @@ void	*vulture(void *ptr)
 //		printf("control->time_to_die> |%d|\n", control->time_to_die);
 //		printf("current_time - control->last_meal[%d]> |%ld|\n", i, current_time - control->last_meal[i]);
 		pthread_mutex_lock(&control->death_access[i]);
-		gettimeofday(&control->tv, NULL);
-		current_time = ((control->tv.tv_sec * 1000) + control->tv.tv_usec / 1000);
+		current_time = get_time(&control->tv);
 		diff = current_time - control->last_meal[i];
 		if (diff > control->time_to_die && (control->last_meal[i] != 0))
 		{
@@ -41,9 +40,7 @@ void	*vulture(void *ptr)
 		pthread_mutex_unlock(&control->death_access[i]);
 		i++;
 	}
-	kill_threads(control);
-	free_all(control);
 	printf("Philosopher %d has died\n", i + 1);
-	exit(1);
+	exit_func(control);
 	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: gsaiago <gsaiago@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 11:56:43 by gsaiago           #+#    #+#             */
-/*   Updated: 2022/10/20 16:40:55 by gsaiago          ###   ########.fr       */
+/*   Updated: 2022/10/20 18:06:00 by gsaiago          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,15 @@ void	*ph_calloc(int size, int bytes)
 	if (!ptr)
 		return (NULL);
 	return (ptr);
+}
+
+long int	get_time(struct timeval *tv)
+{
+	long int	current_time;
+
+	gettimeofday(tv, NULL);
+	current_time = ((tv->tv_sec * 1000) + tv->tv_usec / 1000);
+	return (current_time);
 }
 
 void	create_control(t_control *control, char **av)

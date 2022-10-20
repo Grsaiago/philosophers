@@ -6,7 +6,7 @@
 /*   By: gsaiago <gsaiago@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 17:56:21 by gsaiago           #+#    #+#             */
-/*   Updated: 2022/10/20 16:52:51 by gsaiago          ###   ########.fr       */
+/*   Updated: 2022/10/20 18:53:48 by gsaiago          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,16 @@ typedef struct s_control
 	struct timeval				tv;
 }	t_control;
 // AUX FUNCTIONS //
-void	*ph_calloc(int size, int bytes);
+void		*ph_calloc(int size, int bytes);
+long int	get_time(struct timeval *tv);
+long int	ft_atoi(const char *str);
+long int	ft_tatoi(const char *str, int sign);
+long int	ft_pow10(int n);
 // VALIDATION //
 void 	validate_args(int ac, char **av);
 int		ph_isdigit(int c);
 void	if_in_range(int ac, char **av);
 void	if_number(int ac, char **av);
-
 // THREAD CREATION & EXECUTION //
 t_philo	*create_thread_struct(t_control *control, int i, char **av);
 void	*thread_execute(void *ptr);
@@ -67,5 +70,6 @@ void	free_all(t_control *control);
 void	kill_threads(t_control	*control);
 void	create_control(t_control *control, char **av);
 void	validate_args(int ac, char **av);
+void	exit_func(t_control *control);
 
 #endif

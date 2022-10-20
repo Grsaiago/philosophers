@@ -6,7 +6,7 @@
 /*   By: gsaiago <gsaiago@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:35:05 by gsaiago           #+#    #+#             */
-/*   Updated: 2022/10/20 16:56:49 by gsaiago          ###   ########.fr       */
+/*   Updated: 2022/10/20 18:56:55 by gsaiago          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void if_number(int ac, char **av)
 		{
 			if (!ph_isdigit(av[i][j]))
 			{
-				printf("Error!\nNon Number input\n");
+				printf("Error!\nNon Number/negative input\n");
 				exit(1); // exit func
 			}
 			j++;
