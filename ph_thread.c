@@ -6,7 +6,7 @@
 /*   By: gsaiago <gsaiago@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:40:16 by gsaiago           #+#    #+#             */
-/*   Updated: 2022/10/20 19:14:47 by gsaiago          ###   ########.fr       */
+/*   Updated: 2022/10/20 19:53:57 by gsaiago          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ t_philo	*create_thread_struct(t_control *control, int i, char **av)
 	philo->forkv = control->forkv;
 	philo->death_access = control->death_access;
 	philo->last_meal = control->last_meal;
-	philo->time_to_eat = ft_atol(av[3]);
-	philo->time_to_sleep = ft_atol(av[4]);
+	philo->time_to_eat = ft_atol(av[3]) * 1000;
+	philo->time_to_sleep = ft_atol(av[4]) * 1000;
 	philo->phid = i;
 	philo->prev_f = i - 1;
 	philo->next_f = i;
@@ -44,10 +44,11 @@ void	*thread_execute(void *ptr)
 
 void	dine(t_philo *philo)
 {
+	long int time;
 	death_refresh(philo);
 	while (42)
 	{
-		printf("%d is thinking\n", philo->phid);
+		printf("%d is thinking\n",philo->phid);
 		usleep(150);
 		if (philo->phid == philo->nph)
 		{
