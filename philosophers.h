@@ -6,7 +6,7 @@
 /*   By: gsaiago <gsaiago@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 17:56:21 by gsaiago           #+#    #+#             */
-/*   Updated: 2022/10/20 16:15:16 by gsaiago          ###   ########.fr       */
+/*   Updated: 2022/10/20 16:52:51 by gsaiago          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,15 @@ typedef struct s_control
 }	t_control;
 // AUX FUNCTIONS //
 void	*ph_calloc(int size, int bytes);
+// VALIDATION //
+void 	validate_args(int ac, char **av);
+int		ph_isdigit(int c);
+void	if_in_range(int ac, char **av);
+void	if_number(int ac, char **av);
+
 // THREAD CREATION & EXECUTION //
 t_philo	*create_thread_struct(t_control *control, int i, char **av);
+void	*thread_execute(void *ptr);
 void	dine(t_philo *philo);
 // VULTURE //
 void	death_refresh(t_philo *philo);

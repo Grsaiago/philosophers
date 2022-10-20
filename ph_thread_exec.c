@@ -1,16 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ph_thread.c                                        :+:      :+:    :+:   */
+/*   ph_thread_exec.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gsaiago <gsaiago@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:40:16 by gsaiago           #+#    #+#             */
-/*   Updated: 2022/10/20 16:41:08 by gsaiago          ###   ########.fr       */
+/*   Updated: 2022/10/20 16:44:54 by gsaiago          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+
+void	*thread_execute(void *ptr)
+{
+	t_philo		*philo;
+
+	philo = (t_philo *)ptr;
+	dine(philo);
+	return (NULL);
+}
 
 void	dine(t_philo *philo)
 {

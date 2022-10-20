@@ -6,7 +6,7 @@
 /*   By: gsaiago <gsaiago@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:35:05 by gsaiago           #+#    #+#             */
-/*   Updated: 2022/10/20 16:36:18 by gsaiago          ###   ########.fr       */
+/*   Updated: 2022/10/20 16:56:49 by gsaiago          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void if_number(int ac, char **av)
 		{
 			if (!ph_isdigit(av[i][j]))
 			{
-				printf("Error!");
+				printf("Error!\nNon Number input\n");
 				exit(1); // exit func
 			}
 			j++;
@@ -50,9 +50,28 @@ void if_number(int ac, char **av)
 	return ;
 }
 
+void	if_in_range(int ac, char **av)
+{
+	long int	numb;
+	int			i;
+
+	i = 1;
+	while (i < ac)
+	{
+		numb = atol(av[i]);
+		if (numb > INT_MAX || numb <= 0)
+		{
+			printf("Error!\nNumber larger than INT_MAX or 0\n");
+			exit(1); //exit func
+		}
+		i++;
+	}
+	return ;
+}
+
 void validate_args(int ac, char **av)
 {
 	if_number(ac, av);
-	
-
+	if_in_range(ac, av);
+	return ;
 }
