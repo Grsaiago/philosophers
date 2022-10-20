@@ -6,7 +6,7 @@
 /*   By: gsaiago <gsaiago@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:35:05 by gsaiago           #+#    #+#             */
-/*   Updated: 2022/10/20 18:56:55 by gsaiago          ###   ########.fr       */
+/*   Updated: 2022/10/20 18:59:07 by gsaiago          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	if_in_range(int ac, char **av)
 	i = 1;
 	while (i < ac)
 	{
-		numb = atol(av[i]);
+		numb = ft_atol(av[i]);
 		if (numb > INT_MAX || numb <= 0)
 		{
 			printf("Error!\nNumber larger than INT_MAX or 0\n");

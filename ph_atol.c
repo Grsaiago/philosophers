@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ph_atol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gsaiago <gsaiago@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/30 18:55:33 by gsaiago           #+#    #+#             */
-/*   Updated: 2022/10/20 18:54:58 by gsaiago          ###   ########.fr       */
+/*   Updated: 2022/10/20 18:59:36 by gsaiago          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-long int	ft_atoi(const char *str)
+long int	ft_atol(const char *str)
 {
 	long int	sign;
 

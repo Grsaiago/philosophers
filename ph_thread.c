@@ -6,7 +6,7 @@
 /*   By: gsaiago <gsaiago@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:40:16 by gsaiago           #+#    #+#             */
-/*   Updated: 2022/10/20 18:35:03 by gsaiago          ###   ########.fr       */
+/*   Updated: 2022/10/20 19:14:47 by gsaiago          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ t_philo	*create_thread_struct(t_control *control, int i, char **av)
 	philo->forkv = control->forkv;
 	philo->death_access = control->death_access;
 	philo->last_meal = control->last_meal;
-	philo->time_to_eat = atoi(av[3]);
-	philo->time_to_sleep = atoi(av[4]);
+	philo->time_to_eat = ft_atol(av[3]);
+	philo->time_to_sleep = ft_atol(av[4]);
 	philo->phid = i;
 	philo->prev_f = i - 1;
 	philo->next_f = i;
@@ -47,6 +47,8 @@ void	dine(t_philo *philo)
 	death_refresh(philo);
 	while (42)
 	{
+		printf("%d is thinking\n", philo->phid);
+		usleep(150);
 		if (philo->phid == philo->nph)
 		{
 			pthread_mutex_lock(&philo->forkv[philo->prev_f]);
@@ -60,8 +62,8 @@ void	dine(t_philo *philo)
 			pthread_mutex_lock(&philo->forkv[philo->prev_f]);
 		}
 		printf("%d is eating\n", philo->phid);
-		usleep(philo->time_to_eat);
 		death_refresh(philo);
+		usleep(philo->time_to_eat);
 		if (philo->phid == philo->nph)
 		{
 			pthread_mutex_unlock(&philo->forkv[philo->prev_f]);
@@ -72,8 +74,8 @@ void	dine(t_philo *philo)
 			pthread_mutex_unlock(&philo->forkv[philo->next_f]);
 			pthread_mutex_unlock(&philo->forkv[philo->prev_f]);
 		}
-		printf("%d is thinking\n", philo->phid);
-		usleep(300);
+		printf("%d is sleeping\n", philo->phid);
+		usleep(philo->time_to_sleep);
 	}
 }
 

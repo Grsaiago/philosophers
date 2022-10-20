@@ -6,7 +6,7 @@
 /*   By: gsaiago <gsaiago@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 17:56:21 by gsaiago           #+#    #+#             */
-/*   Updated: 2022/10/20 18:53:48 by gsaiago          ###   ########.fr       */
+/*   Updated: 2022/10/20 18:59:22 by gsaiago          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ typedef struct s_control
 // AUX FUNCTIONS //
 void		*ph_calloc(int size, int bytes);
 long int	get_time(struct timeval *tv);
-long int	ft_atoi(const char *str);
+long int	ft_atol(const char *str);
 long int	ft_tatoi(const char *str, int sign);
 long int	ft_pow10(int n);
 // VALIDATION //
