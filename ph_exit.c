@@ -6,7 +6,7 @@
 /*   By: gsaiago <gsaiago@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:36:27 by gsaiago           #+#    #+#             */
-/*   Updated: 2022/10/20 18:43:10 by gsaiago          ###   ########.fr       */
+/*   Updated: 2022/10/21 20:32:09 by gsaiago          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void	free_all(t_control *control)
 		free(control->last_meal);
 	if (control->forkv)
 		free(control->forkv);
+	if (control->times_eaten)
+		free(control->times_eaten);
 }
 
 void	kill_threads(t_control	*control)
@@ -39,12 +41,14 @@ void	kill_threads(t_control	*control)
 	i = 0;
 	if (!control->thv)
 		return ;
+	pthread_mutex_lock(&control->mutex);
 	while (i < control->nph)
 	{
 		if (control->thv[i])
 			pthread_detach(control->thv[i]);
 		i++;
 	}
+	pthread_mutex_unlock(&control->mutex);
 	return ;
 }
 

@@ -6,7 +6,7 @@
 /*   By: gsaiago <gsaiago@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:40:16 by gsaiago           #+#    #+#             */
-/*   Updated: 2022/10/20 20:04:02 by gsaiago          ###   ########.fr       */
+/*   Updated: 2022/10/21 20:30:40 by gsaiago          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,13 @@ t_philo	*create_thread_struct(t_control *control, int i, char **av)
 	if (!philo)
 		exit (1);
 	philo->nph = control->nph;
+	philo->time_to_eat = ft_atol(av[3]) * 1000;
+	philo->time_to_sleep = ft_atol(av[4]) * 1000;
 	philo->forkv = control->forkv;
 	philo->death_access = control->death_access;
 	philo->last_meal = control->last_meal;
-	philo->time_to_eat = ft_atol(av[3]) * 1000;
-	philo->time_to_sleep = ft_atol(av[4]) * 1000;
+	philo->max_eat = control->max_eat;
+	philo->times_eaten = control->times_eaten;
 	philo->phid = i;
 	philo->prev_f = i - 1;
 	philo->next_f = i;
@@ -38,30 +40,35 @@ void	*thread_execute(void *ptr)
 	t_philo		*philo;
 
 	philo = (t_philo *)ptr;
-	dine(philo);
+	dine(philo); // if fifth_arg == 1
 	return (NULL);
 }
 
 void	dine(t_philo *philo)
 {
 	long int time;
+
 	death_refresh(philo);
 	while (42)
 	{
-		printf("%d is thinking\n",philo->phid);
+		time = get_time(&philo->tv, 100);
+		printf("%ld %d is thinking\n",time, philo->phid);
 		if (philo->phid == philo->nph)
 		{
 			pthread_mutex_lock(&philo->forkv[philo->prev_f]);
-			printf("%d has taken a fork\n", philo->phid);
+			time = get_time(&philo->tv, 100);
+			printf("%ld %d has taken a fork\n", time, philo->phid);
 			pthread_mutex_lock(&philo->forkv[philo->next_f]);
 		}
 		else 
 		{
 			pthread_mutex_lock(&philo->forkv[philo->next_f]);
-			printf("%d has taken a fork\n", philo->phid);
+			time = get_time(&philo->tv, 100);
+			printf("%ld %d has taken a fork\n", time, philo->phid);
 			pthread_mutex_lock(&philo->forkv[philo->prev_f]);
 		}
-		printf("%d is eating\n", philo->phid);
+		time = get_time(&philo->tv, 100);
+		printf("%ld %d is eating\n", time, philo->phid);
 		death_refresh(philo);
 		usleep(philo->time_to_eat);
 		if (philo->phid == philo->nph)
@@ -74,9 +81,19 @@ void	dine(t_philo *philo)
 			pthread_mutex_unlock(&philo->forkv[philo->next_f]);
 			pthread_mutex_unlock(&philo->forkv[philo->prev_f]);
 		}
-		printf("%d is sleeping\n", philo->phid);
+		time = get_time(&philo->tv, 100);
+		printf("%ld %d is sleeping\n", time, philo->phid);
 		usleep(philo->time_to_sleep);
 	}
+	return ;
+}
+
+void	dine_add(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->death_access[philo->phid - 1]);
+	philo->last_meal[philo->phid - 1]++;
+	pthread_mutex_unlock(&philo->death_access[philo->phid - 1]);
+	return ;
 }
 
 void	death_refresh(t_philo *philo)
@@ -84,8 +101,10 @@ void	death_refresh(t_philo *philo)
 	long unsigned int	current_time;
 
 	pthread_mutex_lock(&philo->death_access[philo->phid - 1]);
-	current_time = get_time(&philo->tv);
+	current_time = get_time(&philo->tv, 1);
 	philo->last_meal[philo->phid - 1] = current_time;
+	if (philo->time_to_eat > 0)
+		philo->times_eaten[philo->phid - 1]++;
 	pthread_mutex_unlock(&philo->death_access[philo->phid - 1]);
 	return ;
 }
