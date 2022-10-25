@@ -6,7 +6,7 @@
 /*   By: gsaiago <gsaiago@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 11:56:43 by gsaiago           #+#    #+#             */
-/*   Updated: 2022/10/21 20:23:05 by gsaiago          ###   ########.fr       */
+/*   Updated: 2022/10/25 16:46:26 by gsaiago          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,18 +38,18 @@ long int	get_time(struct timeval *tv, int i)
 
 void	create_control(t_control *control, char **av, int if_times_eat)
 {
-	control->nph = ft_atol(av[1]); // the number of philosophers
+	control->nph = ft_atol(av[1]);
 	control->time_to_die = ft_atol(av[2]) * 1000;
+	control->last_meal_access = (pthread_mutex_t *)ph_calloc(sizeof(pthread_mutex_t), control->nph + 1);
 	control->last_meal = (long unsigned int *)ph_calloc(sizeof(long int), (control->nph + 1));
+	control->times_eaten_access = (pthread_mutex_t *)ph_calloc(sizeof(pthread_mutex_t), control->nph + 1);
 	control->times_eaten = (int *)ph_calloc(sizeof(int), control->nph + 1);
-	control->thv = (pthread_t *)ph_calloc(sizeof(pthread_t *), control->nph + 1); // array in which every position will be a thread id
-	control->philov = (t_philo **)ph_calloc(sizeof(t_philo *), control->nph + 1); // creating a vector with the address of every philo struct
-	control->forkv = (pthread_mutex_t *)ph_calloc(sizeof(pthread_mutex_t), control->nph + 1); //create mutex vector to control everything, alongside the forkv
-	control->death_access = (pthread_mutex_t *)ph_calloc(sizeof(pthread_mutex_t), control->nph + 1);
+	control->philov = (t_philo **)ph_calloc(sizeof(t_philo *), control->nph + 1);
+	control->forkv = (pthread_mutex_t *)ph_calloc(sizeof(pthread_mutex_t), control->nph + 1);
+	control->thv = (pthread_t *)ph_calloc(sizeof(pthread_t *), control->nph + 1);
 	if (if_times_eat)
 		control->max_eat = ft_atol(av[5]);
 	else
 		control->max_eat = 0;
-	pthread_create(&control->vulture ,NULL, &time_vulture, control);
 	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: gsaiago <gsaiago@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:35:05 by gsaiago           #+#    #+#             */
-/*   Updated: 2022/10/20 18:59:07 by gsaiago          ###   ########.fr       */
+/*   Updated: 2022/10/25 16:38:41 by gsaiago          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ void if_number(int ac, char **av)
 	j = 0;
 	if (ac < 4)
 		exit(1);
-//	if (ac == 5)
-//		incrementar o eat_count;
 	while (i < ac)
 	{
 		j = 0;

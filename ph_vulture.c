@@ -6,7 +6,7 @@
 /*   By: gsaiago <gsaiago@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:38:57 by gsaiago           #+#    #+#             */
-/*   Updated: 2022/10/21 20:31:21 by gsaiago          ###   ########.fr       */
+/*   Updated: 2022/10/25 16:49:56 by gsaiago          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,40 +17,52 @@ void	*time_vulture(void *ptr)
 	long int	current_time;
 	long int	diff;
 	int			i;
-	int			all_eat;
 	t_control	*control;
 
 	control = (t_control *)ptr;
-	all_eat = 0;
 	i = 0;
 	while (42)
 	{
-		if (all_eat == control->nph - 1)
-		{
-			current_time = get_time(&control->tv, 100);
-			printf("%ld Everyone has eaten!\n", current_time);
-			break ;
-		}
 		if (i == control->nph)
-		{
-			all_eat = 0;
 			i = 0;
-		}
-		pthread_mutex_lock(&control->death_access[i]);
+		if (stop_eating(control))
+			return (NULL);
+		pthread_mutex_lock(&control->last_meal_access[i]);
 		current_time = get_time(&control->tv, 1);
 		diff = current_time - control->last_meal[i];
 		if (diff > control->time_to_die && (control->last_meal[i] != 0))
 		{
+			current_time = get_time(&control->tv, 100);
 			printf("%ld %d has died\n", current_time, i + 1);
+			pthread_mutex_unlock(&control->last_meal_access[i]);
 			break ;
 		}
-		if (control->times_eaten[i] >= control->max_eat && control->max_eat > 0)
-			all_eat++;
-		pthread_mutex_unlock(&control->death_access[i]);
+		pthread_mutex_unlock(&control->last_meal_access[i]);
 		i++;
 	}
-	pthread_mutex_unlock(&control->death_access[i]);
-	current_time = get_time(&control->tv, 100);
-	exit_func(control);
 	return (NULL);
+}
+
+int stop_eating(t_control *control)
+{
+	int			i;
+	long int	current_time;
+
+	i = 0;
+	if (control->max_eat <= 0)
+		return (0);
+	while (i < control->nph)
+	{
+		pthread_mutex_lock(&control->times_eaten_access[i]);
+		if (control->times_eaten[i] < control->max_eat)
+		{
+			pthread_mutex_unlock(&control->times_eaten_access[i]);
+			return (0);
+		}
+		pthread_mutex_unlock(&control->times_eaten_access[i]);
+		i++;
+	}
+	current_time = get_time(&control->tv, 100);
+	printf("%ld Everyone has eaten!\n", current_time);
+	return (1);
 }

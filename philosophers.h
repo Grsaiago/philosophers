@@ -6,7 +6,7 @@
 /*   By: gsaiago <gsaiago@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 17:56:21 by gsaiago           #+#    #+#             */
-/*   Updated: 2022/10/21 20:06:12 by gsaiago          ###   ########.fr       */
+/*   Updated: 2022/10/25 16:13:41 by gsaiago          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,10 @@ typedef struct s_philo
 	int						time_to_eat;
 	int						time_to_sleep;
 	int						max_eat;
+	pthread_mutex_t			*last_meal_access;
 	long unsigned int		*last_meal;
+	pthread_mutex_t			*times_eaten_access;
 	int						*times_eaten;
-	pthread_mutex_t			*death_access;
 	pthread_mutex_t			*forkv;
 	struct timeval			tv;
 }	t_philo;
@@ -45,13 +46,15 @@ typedef struct s_control
 	long unsigned int		*last_meal;
 	int						*times_eaten;
 	pthread_mutex_t			*forkv;
-	pthread_mutex_t			*death_access;
+	pthread_mutex_t			*last_meal_access;
+	pthread_mutex_t			*times_eaten_access;
 	pthread_t				*thv;
 	t_philo					**philov;
 	pthread_mutex_t			mutex;
 	pthread_t				vulture;
 	struct timeval			tv;
 }	t_control;
+
 // AUX FUNCTIONS //
 void		*ph_calloc(int size, int bytes);
 long int	get_time(struct timeval *tv, int i);
@@ -72,6 +75,7 @@ void	dine_add(t_philo *philo);
 // VULTURE //
 void	death_refresh(t_philo *philo);
 void	*time_vulture(void *ptr);
+int 	stop_eating(t_control *control);
 // EXIT FUNCTIONS //
 void	free_all(t_control *control);
 void	kill_threads(t_control	*control);
