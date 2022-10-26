@@ -6,7 +6,7 @@
 /*   By: gsaiago <gsaiago@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 16:46:10 by gsaiago           #+#    #+#             */
-/*   Updated: 2022/10/26 13:32:09 by gsaiago          ###   ########.fr       */
+/*   Updated: 2022/10/26 17:40:21 by gsaiago          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ void	initialize_mutex_struct_thread(t_control *control, char **av)
 	pthread_mutex_lock(&control->mutex);
 	while (++i < control->nph)
 	{
-		pthread_create(&control->thv[i], NULL, &thread_execute, control->philov[i]);
+		pthread_create(&control->thv[i], NULL,
+			&thread_execute, control->philov[i]);
 		pthread_detach(control->thv[i]);
 	}
 	pthread_mutex_unlock(&control->mutex);

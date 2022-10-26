@@ -6,7 +6,7 @@
 /*   By: gsaiago <gsaiago@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 17:56:21 by gsaiago           #+#    #+#             */
-/*   Updated: 2022/10/26 08:49:16 by gsaiago          ###   ########.fr       */
+/*   Updated: 2022/10/26 17:38:03 by gsaiago          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,11 @@ void		dine(t_philo *philo);
 void		take_forks(t_philo *philo);
 void		return_forks(t_philo *philo);
 void		add_meal(t_philo *philo);
-// VULTURE //
 void		death_refresh(t_philo *philo);
+// VULTURE //
 void		*vulture(void *ptr);
 int			stop_eating(t_control *control);
+int			if_dead(t_control *control, int i);
 // EXIT FUNCTIONS //
 void		free_all(t_control *control);
 void		kill_threads(t_control	*control);
