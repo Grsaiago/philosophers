@@ -6,7 +6,7 @@
 /*   By: gsaiago <gsaiago@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:35:05 by gsaiago           #+#    #+#             */
-/*   Updated: 2022/10/25 16:38:41 by gsaiago          ###   ########.fr       */
+/*   Updated: 2022/10/26 08:28:59 by gsaiago          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	ph_isdigit(int c)
 		return (0);
 }
 
-void if_number(int ac, char **av)
+void	if_number(int ac, char **av)
 {
 	int	i;
 	int	j;
@@ -67,7 +67,7 @@ void	if_in_range(int ac, char **av)
 	return ;
 }
 
-void validate_args(int ac, char **av)
+void	validate_args(int ac, char **av)
 {
 	if_number(ac, av);
 	if_in_range(ac, av);

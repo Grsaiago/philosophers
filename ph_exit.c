@@ -3,10 +3,11 @@
 /*                                                        :::      ::::::::   */
 /*   ph_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gsaiago <gsaiago@student.42.rio>           +#+  +:+       +#+        */
+/*   By: gsaiago <gsaiago@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/20 16:36:27 by gsaiago           #+#    #+#             */
-/*   Updated: 2022/10/25 16:39:37 by gsaiago          ###   ########.fr       */
+/*   Created: 2022/10/26 08:29:22 by gsaiago           #+#    #+#             */
+/*   Updated: 2022/10/26 08:29:32 by gsaiago          ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"

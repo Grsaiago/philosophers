@@ -6,13 +6,13 @@
 /*   By: gsaiago <gsaiago@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:38:57 by gsaiago           #+#    #+#             */
-/*   Updated: 2022/10/25 16:49:56 by gsaiago          ###   ########.fr       */
+/*   Updated: 2022/10/26 08:25:41 by gsaiago          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void	*time_vulture(void *ptr)
+void	*vulture(void *ptr)
 {
 	long int	current_time;
 	long int	diff;
@@ -43,7 +43,7 @@ void	*time_vulture(void *ptr)
 	return (NULL);
 }
 
-int stop_eating(t_control *control)
+int	stop_eating(t_control *control)
 {
 	int			i;
 	long int	current_time;
