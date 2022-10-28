@@ -25,9 +25,10 @@ void	free_all(t_control *control)
 		free(control->times_eaten_access);
 	if (control->times_eaten)
 		free(control->times_eaten);
-	while (i < control->nph)
+	while (i <= control->nph)
 	{
-		free(control->philov[i]);
+		if (control->philov[i])
+			free(control->philov[i]);
 		i++;
 	}
 	if (control->philov)
@@ -56,7 +57,7 @@ void	kill_mutexes(t_control *control)
 
 void	exit_func(t_control *control)
 {
-//	kill_mutexes(control);
-//	free_all(control);
+	kill_mutexes(control);
+	free_all(control);
 	return ;
 }
