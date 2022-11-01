@@ -6,7 +6,7 @@
 #    By: gsaiago <gsaiago@student.42.rio>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/12 16:43:03 by gsaiago           #+#    #+#              #
-#    Updated: 2022/10/28 11:30:42 by gsaiago          ###   ########.fr        #
+#    Updated: 2022/11/01 11:10:37 by gsaiago          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = philo
 
 CC = cc -pthread
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS =  -g -Wall -Wextra -Werror
 
 SRCS =	ph_main.c \
 		ph_utils.c \

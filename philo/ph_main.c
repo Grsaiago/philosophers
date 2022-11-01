@@ -6,7 +6,7 @@
 /*   By: gsaiago <gsaiago@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 16:46:10 by gsaiago           #+#    #+#             */
-/*   Updated: 2022/10/28 11:19:39 by gsaiago          ###   ########.fr       */
+/*   Updated: 2022/11/01 10:42:59 by gsaiago          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,9 @@ int	main(int argc, char **argv)
 	t_control	*control;
 
 	i = 0;
-	control = &(t_control){0}; // main control struct with info
-	validate_args(argc, argv);
+	control = &(t_control){0};
+	if (validate_args(argc, argv))
+		return (0);
 	if (argc == 5)
 		create_control(control, argv, 0);
 	else
@@ -36,7 +37,7 @@ void	initialize_mutex_struct_thread(t_control *control, char **av)
 	int	i;
 
 	i = -1;
-	while (++i < control->nph) // initialize mutexes.
+	while (++i < control->nph)
 	{
 		pthread_mutex_init(&control->forkv[i], NULL);
 		pthread_mutex_init(&control->last_meal_access[i], NULL);

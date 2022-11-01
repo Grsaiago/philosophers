@@ -6,7 +6,7 @@
 /*   By: gsaiago <gsaiago@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 17:56:21 by gsaiago           #+#    #+#             */
-/*   Updated: 2022/10/26 17:38:03 by gsaiago          ###   ########.fr       */
+/*   Updated: 2022/11/01 10:50:15 by gsaiago          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,10 @@ long int	ft_atol(const char *str);
 long int	ft_tatoi(const char *str, int sign);
 long int	ft_pow10(int n);
 // VALIDATION //
-void		validate_args(int ac, char **av);
+int			validate_args(int ac, char **av);
 int			ph_isdigit(int c);
-void		if_in_range(int ac, char **av);
-void		if_number(int ac, char **av);
+int			if_in_range(int ac, char **av);
+int			if_number(int ac, char **av);
 // THREAD CREATION & EXECUTION //
 void		initialize_mutex_struct_thread(t_control *control, char **av);
 void		create_control(t_control *control, char **av, int if_times_eat);
@@ -83,7 +83,6 @@ int			if_dead(t_control *control, int i);
 // EXIT FUNCTIONS //
 void		free_all(t_control *control);
 void		kill_threads(t_control	*control);
-void		validate_args(int ac, char **av);
 void		exit_func(t_control *control);
 
 #endif

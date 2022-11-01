@@ -6,7 +6,7 @@
 /*   By: gsaiago <gsaiago@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:35:05 by gsaiago           #+#    #+#             */
-/*   Updated: 2022/10/28 11:32:14 by gsaiago          ###   ########.fr       */
+/*   Updated: 2022/11/01 11:12:43 by gsaiago          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	ph_isdigit(int c)
 		return (0);
 }
 
-void	if_number(int ac, char **av)
+int	if_number(int ac, char **av)
 {
 	int	i;
 	int	j;
@@ -28,7 +28,7 @@ void	if_number(int ac, char **av)
 	i = 1;
 	j = 0;
 	if (ac < 4)
-		exit(1);
+		return (1);
 	while (i < ac)
 	{
 		j = 0;
@@ -39,16 +39,16 @@ void	if_number(int ac, char **av)
 			if (!ph_isdigit(av[i][j]))
 			{
 				printf("Error!\nNon Number/negative input\n");
-				exit(1); // exit func
+				return (1);
 			}
 			j++;
 		}
 		i++;
 	}
-	return ;
+	return (0);
 }
 
-void	if_in_range(int ac, char **av)
+int	if_in_range(int ac, char **av)
 {
 	long int	numb;
 	int			i;
@@ -60,16 +60,18 @@ void	if_in_range(int ac, char **av)
 		if (numb > INT_MAX || numb <= 0)
 		{
 			printf("Error!\nNumber larger than INT_MAX or 0\n");
-			exit(1); //exit func
+			return (1);
 		}
 		i++;
 	}
-	return ;
+	return (0);
 }
 
-void	validate_args(int ac, char **av)
+int	validate_args(int ac, char **av)
 {
-	if_number(ac, av);
-	if_in_range(ac, av);
-	return ;
+	if (if_number(ac, av))
+		return (1);
+	if (if_in_range(ac, av))
+		return (1);
+	return (0);
 }
