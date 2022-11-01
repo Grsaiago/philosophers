@@ -6,7 +6,7 @@
 /*   By: gsaiago <gsaiago@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 08:29:22 by gsaiago           #+#    #+#             */
-/*   Updated: 2022/10/26 08:29:32 by gsaiago          ###   ########.fr       */
+/*   Updated: 2022/10/28 10:46:40 by gsaiago          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	free_all(t_control *control)
 		free(control->times_eaten_access);
 	if (control->times_eaten)
 		free(control->times_eaten);
-	while (i <= control->nph)
+	while (i < control->nph)
 	{
 		if (control->philov[i])
 			free(control->philov[i]);

@@ -6,7 +6,7 @@
 /*   By: gsaiago <gsaiago@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 16:46:10 by gsaiago           #+#    #+#             */
-/*   Updated: 2022/10/26 17:40:21 by gsaiago          ###   ########.fr       */
+/*   Updated: 2022/10/28 11:19:39 by gsaiago          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int	main(int argc, char **argv)
 {
 	int			i;
-	int			*vulture_ret;
 	t_control	*control;
 
 	i = 0;

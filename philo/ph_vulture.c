@@ -6,7 +6,7 @@
 /*   By: gsaiago <gsaiago@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:38:57 by gsaiago           #+#    #+#             */
-/*   Updated: 2022/10/26 17:39:05 by gsaiago          ###   ########.fr       */
+/*   Updated: 2022/10/28 11:19:20 by gsaiago          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	*vulture(void *ptr)
 {
 	int			i;
-	int			flag;
 	t_control	*control;
 
 	control = (t_control *)ptr;
