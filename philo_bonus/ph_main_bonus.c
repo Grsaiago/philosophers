@@ -1,35 +1,40 @@
 #include "philosophers_bonus.h"
 
-int	main(void)
+int	main(int argc, char **argv)
 {
-	int	i;
-	int	*philov;
-	int	id;
-	t_control *control;	
+	int			i;
+	int			*philov;
+	int			pid;
+	int			sem;
+	t_control	*control;	
 
 	control = &(t_control){0};
-	control->nph = 3;
-	control->philov = (int *)ph_calloc(sizeof(int), control->nph + 1);
-	control->forks = sem_open("forks", O_CREAT, O_RDWR, control->nph);
-	control->death_sem = sem_open("death", O_CREAT, O_RDWR, 0);
-	control->time_to_eat = 200;
-	control->time_to_die = 1000;
-	control->time_to_sleep = 100;
+	if (validate_args(argc, argv))
+		return (0);
+	create_control(control, argv);
 	i = -1;
 	while (++i < control->nph)
 	{
-	    control->philov[i] = fork();
-		id = control->philov[i];
-	    if (id == 0)
+	    pid = fork();
+	    if (pid == 0)
 		{
 			control->phid = i + 1;
 		    break ;
 		}
+		else
+		{
+			if (!control->philov)
+			{
+				control->philov = (int *)ph_calloc(sizeof(int), control->nph + 1);
+				control->philov[i] = pid;
+			}
+			else
+				control->philov[i] = pid;
+		}
 	}
-	if (id == 0)
+	if (pid == 0)
 	{
-		pthread_create(&control->vulture_thread, NULL, &vulture_exec, control); 
-		pthread_detach(control->vulture_thread);
+		vulture_create(control);
 		while (42)
 		{
 			death_refresh(control);
@@ -48,18 +53,20 @@ int	main(void)
 	}
 	else
 	{
-	    i = 0;
-	    while (i < control->nph)
-		{
-			waitpid(control->philov[i], NULL, 0);
-			i++;
-		}
+		sem_getvalue(control->death_sem, &sem);
+		printf("Valor do death_sem > %d\n", sem);
 	}
-	sem_wait(control->forks);
+	sem_wait(control->death_sem); //esse sem_wait não tá esperando, mesmo sendo inicializado com 0 na initialize control
 	i = 0;
 	while (i < control->nph)
 	{
 		kill(control->philov[i], SIGKILL);
+		i++;
+	}
+	i = 0;
+	while (i < control->nph)
+	{
+		waitpid(control->philov[i], NULL, 0);
 		i++;
 	}
 	free(control->philov);

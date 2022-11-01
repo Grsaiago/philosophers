@@ -17,7 +17,7 @@ clean:
 
 re: clean all
 
-t: all
+t: re
 	./$(NAME)	
 
 .PHONY:

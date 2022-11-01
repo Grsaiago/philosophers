@@ -6,7 +6,7 @@
 /*   By: gsaiago <gsaiago@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 17:56:21 by gsaiago           #+#    #+#             */
-/*   Updated: 2022/11/01 10:50:15 by gsaiago          ###   ########.fr       */
+/*   Updated: 2022/11/01 13:25:13 by gsaiago          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,18 +55,18 @@ typedef struct s_control
 	struct timeval		tv;
 }	t_control;
 
-// AUX FUNCTIONS //
+/* AUX FUNCTIONS */
 void		*ph_calloc(int size, int bytes);
 long int	get_time(struct timeval *tv, int i);
 long int	ft_atol(const char *str);
 long int	ft_tatoi(const char *str, int sign);
 long int	ft_pow10(int n);
-// VALIDATION //
+/* VALIDATION */
 int			validate_args(int ac, char **av);
 int			ph_isdigit(int c);
 int			if_in_range(int ac, char **av);
 int			if_number(int ac, char **av);
-// THREAD CREATION & EXECUTION //
+/* THREAD CREATION & EXECUTION */
 void		initialize_mutex_struct_thread(t_control *control, char **av);
 void		create_control(t_control *control, char **av, int if_times_eat);
 t_philo		*create_thread_struct(t_control *control, int i, char **av);
@@ -76,11 +76,11 @@ void		take_forks(t_philo *philo);
 void		return_forks(t_philo *philo);
 void		add_meal(t_philo *philo);
 void		death_refresh(t_philo *philo);
-// VULTURE //
+/* VULTURE */
 void		*vulture(void *ptr);
 int			stop_eating(t_control *control);
 int			if_dead(t_control *control, int i);
-// EXIT FUNCTIONS //
+/* EXIT FUNCTIONS */
 void		free_all(t_control *control);
 void		kill_threads(t_control	*control);
 void		exit_func(t_control *control);
