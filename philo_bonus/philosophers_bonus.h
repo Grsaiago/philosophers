@@ -6,7 +6,7 @@
 /*   By: gsaiago <gsaiago@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 13:21:02 by gsaiago           #+#    #+#             */
-/*   Updated: 2022/11/03 16:57:42 by gsaiago          ###   ########.fr       */
+/*   Updated: 2022/11/03 17:58:40 by gsaiago          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,11 @@ void 		create_control(t_control *control, char **av);
 void		*ph_calloc(int size, int bytes);
 long int	get_time(struct timeval *tv, int i);
 void		death_refresh(t_control *control);
+int			create_children(t_control *control);
+/* DINE FUNCTION */
+void		dine(t_control *control);
+void		dine_take_forks(t_control *control);
+void		dine_eat(t_control *control);
 /* VULTURE FUNC */
 void		vulture_create(t_control *control);
 void		*vulture_exec(void *ptr);
@@ -64,9 +69,7 @@ void		*vulture_exec(void *ptr);
 long int	ft_atol(const char *str);
 long int	ft_pow10(int n);
 long int	ft_tatoi(const char *str, int sign);
-//void		thread_execute(t_control *control); // vai chamar a vulture, vai ser a função passada no thread_create
-//void		vulture(void *ptr); //essa vai ser a função que fica vendo se o philo tem que morrer
-//void		allow_death(t_control *control); // vai dar free em memória alocada pelos child e incrementar um semáforo de matar geral, que vai estar em sem_wait na main;
-//void		kill_process(t_control *control); // vai dar free em memória alocada na heap e incrementar o semáforo de matar geral na main;
+/* EXIT FUNC */
+void	exit_func(t_control *control, int flag);
 
 #endif

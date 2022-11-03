@@ -6,7 +6,7 @@
 /*   By: gsaiago <gsaiago@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 13:40:33 by gsaiago           #+#    #+#             */
-/*   Updated: 2022/11/03 17:02:17 by gsaiago          ###   ########.fr       */
+/*   Updated: 2022/11/03 17:32:54 by gsaiago          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,9 @@ void	*vulture_exec(void *ptr)
 		if (diff > control->time_to_die && (control->last_meal != 0))
 		{
 			current_time = get_time(&control->tv_last_meal, 100);
+			sem_wait(control->stout_sem);
 			printf("%ld %d has died\n", current_time, control->phid);
+			sem_post(control->stout_sem);
 			pthread_mutex_unlock(&control->last_meal_access);
 			sem_post(control->death_sem);
 			return (NULL);

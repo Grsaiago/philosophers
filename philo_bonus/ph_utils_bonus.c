@@ -6,7 +6,7 @@
 /*   By: gsaiago <gsaiago@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 20:10:10 by gsaiago           #+#    #+#             */
-/*   Updated: 2022/11/03 16:56:08 by gsaiago          ###   ########.fr       */
+/*   Updated: 2022/11/03 17:48:46 by gsaiago          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	death_refresh(t_control *control)
 	return ;
 }
 
-void create_control(t_control *control, char **av)
+void	create_control(t_control *control, char **av)
 {
 	sem_unlink("/forks_sem");
 	sem_unlink("/death_sem");
@@ -59,4 +59,28 @@ void create_control(t_control *control, char **av)
 	control->forks = sem_open("/forks_sem", O_CREAT | O_RDWR, S_IRWXU | S_IRWXG | S_IRWXO, control->nph);
 	control->death_sem = sem_open("/death_sem", O_CREAT | O_RDWR, S_IRWXU | S_IRWXG | S_IRWXO, 0);
 	control->stout_sem = sem_open("/stout_sem", O_CREAT | O_RDWR, S_IRWXU | S_IRWXG | S_IRWXO, 1);
+}
+
+int	create_children(t_control *control)
+{
+	int	i;
+	int	pid;
+
+	i = -1;
+	while (++i < control->nph)
+	{
+	    pid = fork();
+	    if (pid == 0)
+		{
+			control->phid = i + 1;
+		    return (0);
+		}
+		else
+		{
+			if (!control->philov)
+				control->philov = (int *)ph_calloc(sizeof(int), control->nph + 1);
+			control->philov[i] = pid;
+		}
+	}
+	return (pid);
 }
