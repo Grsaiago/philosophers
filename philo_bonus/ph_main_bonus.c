@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ph_main_bonus.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gsaiago <gsaiago@student.42.rio>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/02 20:09:51 by gsaiago           #+#    #+#             */
+/*   Updated: 2022/11/02 20:09:52 by gsaiago          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philosophers_bonus.h"
 
 int	main(int argc, char **argv)
@@ -12,6 +24,19 @@ int	main(int argc, char **argv)
 	if (validate_args(argc, argv))
 		return (0);
 	create_control(control, argv);
+/*	
+	i = sem_unlink("forks") ? printf("Falha no unlink\n") : printf("Sucesso no unlink\n");
+	i = sem_unlink("death") ? printf("Falha no unlink\n") : printf("Sucesso no unlink\n");
+	elu = sem_open("elu", O_CREAT, S_IRUSR | S_IRWXU, 3);
+	printf("Sem address: %p\n", elu);
+	i = sem_post(control->forks) ? printf("Deu ruim no A\n") : printf("Deu bom no A\n");
+	printf("A\n");
+	i = sem_wait(elu) ? printf("Deu ruim no B\n") : printf("Deu bom no B\n");
+	printf("B\n");
+	i = sem_wait(elu) ? printf("Deu ruim no C\n") : printf("Deu bom no C\n");
+	printf("C\n");
+	i = sem_unlink("elu") ? printf("Falha no unlink\n") : printf("Sucesso no unlink\n");
+*/	
 	i = -1;
 	while (++i < control->nph)
 	{
@@ -26,9 +51,7 @@ int	main(int argc, char **argv)
 			if (!control->philov)
 			{
 				control->philov = (int *)ph_calloc(sizeof(int), control->nph + 1);
-				control->philov[i] = pid;
 			}
-			else
 				control->philov[i] = pid;
 		}
 	}
@@ -51,12 +74,7 @@ int	main(int argc, char **argv)
 			usleep(control->time_to_sleep);
 		}
 	}
-	else
-	{
-		sem_getvalue(control->death_sem, &sem);
-		printf("Valor do death_sem > %d\n", sem);
-	}
-	sem_wait(control->death_sem); //esse sem_wait não tá esperando, mesmo sendo inicializado com 0 na initialize control
+	i = sem_wait(control->death_sem) ? printf("Deu errado\n") : printf("Deu certo\n");//esse sem_wait não tá esperando, mesmo sendo inicializado com 0 na initialize control
 	i = 0;
 	while (i < control->nph)
 	{

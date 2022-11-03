@@ -6,7 +6,7 @@
 /*   By: gsaiago <gsaiago@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 13:21:02 by gsaiago           #+#    #+#             */
-/*   Updated: 2022/11/01 14:02:27 by gsaiago          ###   ########.fr       */
+/*   Updated: 2022/11/02 14:37:32 by gsaiago          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <sys/time.h>
 # include <fcntl.h>
 # include <limits.h>
+# include <errno.h>
 
 typedef struct s_control
 {

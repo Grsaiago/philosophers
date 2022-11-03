@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ph_utils_bonus.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gsaiago <gsaiago@student.42.rio>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/02 20:10:10 by gsaiago           #+#    #+#             */
+/*   Updated: 2022/11/02 20:10:11 by gsaiago          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philosophers_bonus.h"
 
 void	*ph_calloc(int size, int bytes)
@@ -37,10 +49,12 @@ void	death_refresh(t_control *control)
 
 void create_control(t_control *control, char **av)
 {
+	sem_unlink("forks");
+	sem_unlink("death");
 	control->nph = ft_atol(av[1]);
-	control->time_to_die = ft_atol(av[2]);
-	control->time_to_eat = ft_atol(av[3]);
-	control->time_to_sleep = ft_atol(av[4]);
-	control->forks = sem_open("forks", O_CREAT, O_RDWR, control->nph);
-	control->death_sem = sem_open("death", O_CREAT, O_RDWR, 1);
+	control->time_to_die = ft_atol(av[2]) * 1000;
+	control->time_to_eat = ft_atol(av[3]) * 1000;
+	control->time_to_sleep = ft_atol(av[4]) * 1000;
+	control->forks = sem_open("forks", O_CREAT | O_RDWR, S_IRWXU | S_IRWXG | S_IRWXO, control->nph);
+	control->death_sem = sem_open("death", O_CREAT | O_RDWR, S_IRWXU | S_IRWXG | S_IRWXO, 0);
 }
