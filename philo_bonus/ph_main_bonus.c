@@ -6,7 +6,7 @@
 /*   By: gsaiago <gsaiago@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 20:09:51 by gsaiago           #+#    #+#             */
-/*   Updated: 2022/11/02 20:09:52 by gsaiago          ###   ########.fr       */
+/*   Updated: 2022/11/03 17:01:18 by gsaiago          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int	main(int argc, char **argv)
 	int			i;
 	int			*philov;
 	int			pid;
-	int			sem;
 	t_control	*control;	
 
 	control = &(t_control){0};
@@ -61,16 +60,20 @@ int	main(int argc, char **argv)
 		while (42)
 		{
 			death_refresh(control);
-			printf("ms %d is thinking\n", control->phid);
+			control->timestamp = get_time(&control->tv_timestamp, 100);
+			printf("%ld %d is thinking\n", control->timestamp, control->phid);
 			sem_wait(control->forks);
-			printf("ms %d has taken a fork\n", control->phid);
+			control->timestamp = get_time(&control->tv_timestamp, 100);
+			printf("%ld %d has taken a fork\n",control->timestamp, control->phid);
 			sem_wait(control->forks);
 			death_refresh(control);
-			printf("ms %d is eating\n", control->phid);
+			control->timestamp = get_time(&control->tv_timestamp, 100);
+			printf("%ld %d is eating\n", control->timestamp, control->phid);
 			usleep(control->time_to_eat);
 			sem_post(control->forks);
 			sem_post(control->forks);
-			printf("ms %d is sleeping\n", control->phid);
+			control->timestamp = get_time(&control->tv_timestamp, 100);
+			printf("%ld %d is sleeping\n", control->timestamp, control->phid);
 			usleep(control->time_to_sleep);
 		}
 	}

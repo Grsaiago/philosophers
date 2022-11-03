@@ -6,7 +6,7 @@
 /*   By: gsaiago <gsaiago@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 13:21:02 by gsaiago           #+#    #+#             */
-/*   Updated: 2022/11/02 14:37:32 by gsaiago          ###   ########.fr       */
+/*   Updated: 2022/11/03 16:57:42 by gsaiago          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,13 @@ typedef struct s_control
 	int					*philov;
 	sem_t				*forks;
 	sem_t				*death_sem;
+	sem_t				*stout_sem;
 	pthread_t			vulture_thread;
 	pthread_mutex_t		last_meal_access;
 	long unsigned int	last_meal;
-	struct timeval	tv;
+	long unsigned int	timestamp;
+	struct timeval		tv_timestamp;
+	struct timeval		tv_last_meal;
 
 }	t_control;
 

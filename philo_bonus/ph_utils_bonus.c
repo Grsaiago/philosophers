@@ -6,7 +6,7 @@
 /*   By: gsaiago <gsaiago@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 20:10:10 by gsaiago           #+#    #+#             */
-/*   Updated: 2022/11/02 20:10:11 by gsaiago          ###   ########.fr       */
+/*   Updated: 2022/11/03 16:56:08 by gsaiago          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	death_refresh(t_control *control)
 	long unsigned int	current_time;
 
 	pthread_mutex_lock(&control->last_meal_access);
-	current_time = get_time(&control->tv, 1);
+	current_time = get_time(&control->tv_last_meal, 1);
 	control->last_meal = current_time;
 	pthread_mutex_unlock(&control->last_meal_access);
 	return ;
@@ -49,12 +49,14 @@ void	death_refresh(t_control *control)
 
 void create_control(t_control *control, char **av)
 {
-	sem_unlink("forks");
-	sem_unlink("death");
+	sem_unlink("/forks_sem");
+	sem_unlink("/death_sem");
+	sem_unlink("/stout_sem");
 	control->nph = ft_atol(av[1]);
 	control->time_to_die = ft_atol(av[2]) * 1000;
 	control->time_to_eat = ft_atol(av[3]) * 1000;
 	control->time_to_sleep = ft_atol(av[4]) * 1000;
-	control->forks = sem_open("forks", O_CREAT | O_RDWR, S_IRWXU | S_IRWXG | S_IRWXO, control->nph);
-	control->death_sem = sem_open("death", O_CREAT | O_RDWR, S_IRWXU | S_IRWXG | S_IRWXO, 0);
+	control->forks = sem_open("/forks_sem", O_CREAT | O_RDWR, S_IRWXU | S_IRWXG | S_IRWXO, control->nph);
+	control->death_sem = sem_open("/death_sem", O_CREAT | O_RDWR, S_IRWXU | S_IRWXG | S_IRWXO, 0);
+	control->stout_sem = sem_open("/stout_sem", O_CREAT | O_RDWR, S_IRWXU | S_IRWXG | S_IRWXO, 1);
 }
