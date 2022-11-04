@@ -6,7 +6,7 @@
 /*   By: gsaiago <gsaiago@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 20:10:10 by gsaiago           #+#    #+#             */
-/*   Updated: 2022/11/03 17:48:46 by gsaiago          ###   ########.fr       */
+/*   Updated: 2022/11/03 21:12:57 by gsaiago          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,18 +47,26 @@ void	death_refresh(t_control *control)
 	return ;
 }
 
-void	create_control(t_control *control, char **av)
+void	create_control(t_control *control, char **av, int times_eat)
 {
 	sem_unlink("/forks_sem");
 	sem_unlink("/death_sem");
 	sem_unlink("/stout_sem");
+	sem_unlink("/times_eaten_sem");
 	control->nph = ft_atol(av[1]);
 	control->time_to_die = ft_atol(av[2]) * 1000;
 	control->time_to_eat = ft_atol(av[3]) * 1000;
 	control->time_to_sleep = ft_atol(av[4]) * 1000;
-	control->forks = sem_open("/forks_sem", O_CREAT | O_RDWR, S_IRWXU | S_IRWXG | S_IRWXO, control->nph);
-	control->death_sem = sem_open("/death_sem", O_CREAT | O_RDWR, S_IRWXU | S_IRWXG | S_IRWXO, 0);
-	control->stout_sem = sem_open("/stout_sem", O_CREAT | O_RDWR, S_IRWXU | S_IRWXG | S_IRWXO, 1);
+	control->forks = sem_open("/forks_sem", O_CREAT | O_RDWR,
+			S_IRWXU | S_IRWXG | S_IRWXO, control->nph);
+	control->death_sem = sem_open("/death_sem", O_CREAT | O_RDWR,
+			S_IRWXU | S_IRWXG | S_IRWXO, 0);
+	control->stout_sem = sem_open("/stout_sem", O_CREAT | O_RDWR,
+			S_IRWXU | S_IRWXG | S_IRWXO, 1);
+	if (times_eat)
+		control->max_eat = ft_atol(av[5]);
+	else
+		control->max_eat = 0;
 }
 
 int	create_children(t_control *control)
@@ -69,16 +77,17 @@ int	create_children(t_control *control)
 	i = -1;
 	while (++i < control->nph)
 	{
-	    pid = fork();
-	    if (pid == 0)
+		pid = fork();
+		if (pid == 0)
 		{
 			control->phid = i + 1;
-		    return (0);
+			return (0);
 		}
 		else
 		{
 			if (!control->philov)
-				control->philov = (int *)ph_calloc(sizeof(int), control->nph + 1);
+				control->philov = (int *)ph_calloc(sizeof(int),
+						control->nph + 1);
 			control->philov[i] = pid;
 		}
 	}

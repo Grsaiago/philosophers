@@ -6,13 +6,13 @@
 /*   By: gsaiago <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 17:22:00 by gsaiago           #+#    #+#             */
-/*   Updated: 2022/11/03 17:29:53 by gsaiago          ###   ########.fr       */
+/*   Updated: 2022/11/03 21:17:53 by gsaiago          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers_bonus.h"
 
-void	exit_func(t_control *control, int flag)
+void	exit_func(t_control *control)
 {
 	int	i;
 
