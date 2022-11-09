@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ph_initialize.c                                    :+:      :+:    :+:   */
+/*   ph_dinner.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gsaiago <gsaiago@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 11:05:11 by gsaiago           #+#    #+#             */
-/*   Updated: 2022/10/28 11:08:00 by gsaiago          ###   ########.fr       */
+/*   Updated: 2022/11/08 23:02:06 by gsaiago          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,17 @@ void	dine(t_philo *philo)
 	death_refresh(philo);
 	while (42)
 	{
-		time = get_time(&philo->tv, 100);
+		time = get_time(&philo->tv, 1000);
 		printf("%ld %d is thinking\n", time, philo->phid);
 		take_forks(philo);
 		death_refresh(philo);
-		time = get_time(&philo->tv, 100);
+		time = get_time(&philo->tv, 1000);
 		printf("%ld %d is eating\n", time, philo->phid);
 		usleep(philo->time_to_eat);
 		if (philo->max_eat > 0)
 			add_meal(philo);
 		return_forks(philo);
-		time = get_time(&philo->tv, 100);
+		time = get_time(&philo->tv, 1000);
 		printf("%ld %d is sleeping\n", time, philo->phid);
 		usleep(philo->time_to_sleep);
 	}
@@ -62,14 +62,14 @@ void	take_forks(t_philo *philo)
 	if (philo->phid == philo->nph)
 	{
 		pthread_mutex_lock(&philo->forkv[philo->prev_f]);
-		time = get_time(&philo->tv, 100);
+		time = get_time(&philo->tv, 1000);
 		printf("%ld %d has taken a fork\n", time, philo->phid);
 		pthread_mutex_lock(&philo->forkv[philo->next_f]);
 	}
 	else
 	{
 		pthread_mutex_lock(&philo->forkv[philo->next_f]);
-		time = get_time(&philo->tv, 100);
+		time = get_time(&philo->tv, 1000);
 		printf("%ld %d has taken a fork\n", time, philo->phid);
 		pthread_mutex_lock(&philo->forkv[philo->prev_f]);
 	}

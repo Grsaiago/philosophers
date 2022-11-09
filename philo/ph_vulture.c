@@ -6,7 +6,7 @@
 /*   By: gsaiago <gsaiago@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:38:57 by gsaiago           #+#    #+#             */
-/*   Updated: 2022/10/28 11:19:20 by gsaiago          ###   ########.fr       */
+/*   Updated: 2022/11/08 23:02:22 by gsaiago          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	stop_eating(t_control *control)
 		pthread_mutex_unlock(&control->times_eaten_access[i]);
 		i++;
 	}
-	current_time = get_time(&control->tv, 100);
+	current_time = get_time(&control->tv, 1000);
 	printf("%ld Everyone has eaten!\n", current_time);
 	return (1);
 }
@@ -70,7 +70,7 @@ int	if_dead(t_control *control, int i)
 	diff = current_time - control->last_meal[i];
 	if (diff > control->time_to_die && (control->last_meal[i] != 0))
 	{
-		current_time = get_time(&control->tv, 100);
+		current_time = get_time(&control->tv, 1000);
 		printf("%ld %d has died\n", current_time, i + 1);
 		return (1);
 	}

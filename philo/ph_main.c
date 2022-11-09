@@ -6,7 +6,7 @@
 /*   By: gsaiago <gsaiago@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 16:46:10 by gsaiago           #+#    #+#             */
-/*   Updated: 2022/11/01 10:42:59 by gsaiago          ###   ########.fr       */
+/*   Updated: 2022/11/08 22:44:45 by gsaiago          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,8 @@
 
 int	main(int argc, char **argv)
 {
-	int			i;
 	t_control	*control;
 
-	i = 0;
 	control = &(t_control){0};
 	if (validate_args(argc, argv))
 		return (0);
