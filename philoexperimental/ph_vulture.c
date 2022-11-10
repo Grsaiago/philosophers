@@ -6,7 +6,7 @@
 /*   By: gsaiago <gsaiago@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:38:57 by gsaiago           #+#    #+#             */
-/*   Updated: 2022/11/08 22:49:10 by gsaiago          ###   ########.fr       */
+/*   Updated: 2022/11/10 20:01:13 by gsaiago          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	*vulture(void *ptr)
 		if (if_dead(control, i))
 		{
 			pthread_mutex_unlock(&control->last_meal_access[i]);
-			break ;
+			return (NULL);
 		}
 		pthread_mutex_unlock(&control->last_meal_access[i]);
 		i++;

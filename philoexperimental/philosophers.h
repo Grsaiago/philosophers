@@ -6,7 +6,7 @@
 /*   By: gsaiago <gsaiago@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 17:56:21 by gsaiago           #+#    #+#             */
-/*   Updated: 2022/11/08 22:25:05 by gsaiago          ###   ########.fr       */
+/*   Updated: 2022/11/10 19:08:17 by gsaiago          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ typedef struct s_philo
 	int					time_to_sleep;
 	int					max_eat;
 	int					times_eaten;
+	int					*fork_state;
+	pthread_mutex_t		*fork_state_access;
 	int					*stop_eating;
 	pthread_mutex_t		*stop_eating_access;
 	long unsigned int	*last_meal;
@@ -44,11 +46,13 @@ typedef struct s_control
 	int					nph;
 	int					time_to_die;
 	int					max_eat;
+	int					*fork_state;
+	pthread_mutex_t		*fork_state_access;
 	long unsigned int	*last_meal;
+	pthread_mutex_t		*last_meal_access;
 	int					*stop_eating;
 	pthread_mutex_t		*stop_eating_access;
 	pthread_mutex_t		*forkv;
-	pthread_mutex_t		*last_meal_access;
 	pthread_t			*thv;
 	t_philo				**philov;
 	pthread_t			vulture;
@@ -70,8 +74,7 @@ int			if_number(int ac, char **av);
 void		initialize_mutex_struct_thread(t_control *control, char **av);
 void		create_control(t_control *control, char **av, int if_times_eat);
 t_philo		*create_thread_struct(t_control *control, int i, char **av);
-void		*thread_execute(void *ptr);
-void		dine(t_philo *philo);
+void		*dine(void *ptr);
 int			ph_think(t_philo *philo);
 int			ph_eat(t_philo *philo);
 int			ph_sleep(t_philo *philo);
@@ -80,6 +83,8 @@ void		return_forks(t_philo *philo);
 int			add_meal(t_philo *philo);
 void		death_refresh(t_philo *philo);
 int			stop_execution(t_philo	*philo);
+int			trylock_fork(t_philo *philo, int n_fork);
+void		ph_unlock_fork(t_philo *philo, int n_fork);
 /* VULTURE */
 void		*vulture(void *ptr);
 int			stop_eating(t_control *control);

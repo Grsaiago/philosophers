@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ph_eat_sleep_think.c                               :+:      :+:    :+:   */
+/*   ph_think_eat_sleep.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gsaiago <gsaiago@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 21:20:48 by gsaiago           #+#    #+#             */
-/*   Updated: 2022/11/08 22:48:52 by gsaiago          ###   ########.fr       */
+/*   Updated: 2022/11/10 19:03:27 by gsaiago          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,58 @@ int	ph_sleep(t_philo *philo)
 	printf("%ld %d is sleeping\n", get_time(&philo->tv, 1000), philo->phid);
 	usleep(philo->time_to_sleep);
 	return (0);
+}
+
+int	take_forks(t_philo *philo)
+{
+	if (philo->phid == philo->nph)
+	{
+		while (42)
+		{
+			if (trylock_fork(philo, philo->prev_f))
+				break ;
+			if (stop_execution(philo))
+				return (1);
+		}
+		while (42)
+		{
+			if (trylock_fork(philo, philo->next_f))
+				break ;
+			if (stop_execution(philo))
+				return (1);
+		}
+	}
+	else
+	{
+		while (42)
+		{
+			if (trylock_fork(philo, philo->next_f))
+				break ;
+			if (stop_execution(philo))
+				return (1);
+		}
+		while (42)
+		{
+			if (trylock_fork(philo, philo->prev_f))
+				break ;
+			if (stop_execution(philo))
+				return (1);
+		}
+	}
+	return (0);
+}
+
+void	return_forks(t_philo *philo)
+{
+	if (philo->phid == philo->nph)
+	{
+		ph_unlock_fork(philo, philo->prev_f);
+		ph_unlock_fork(philo, philo->next_f);
+	}
+	else
+	{
+		ph_unlock_fork(philo, philo->next_f);
+		ph_unlock_fork(philo, philo->prev_f);
+	}
+	return ;
 }
