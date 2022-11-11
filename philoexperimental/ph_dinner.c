@@ -6,7 +6,7 @@
 /*   By: gsaiago <gsaiago@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 11:05:11 by gsaiago           #+#    #+#             */
-/*   Updated: 2022/11/10 19:05:45 by gsaiago          ###   ########.fr       */
+/*   Updated: 2022/11/10 21:49:37 by gsaiago          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	add_meal(t_philo *philo)
 	if (philo->max_eat <= 0)
 		return (0);
 	philo->times_eaten++;
-	if (philo->times_eaten > philo->max_eat)
+	if (philo->times_eaten >= philo->max_eat)
 		return (1);
 	return (0);
 }

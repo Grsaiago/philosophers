@@ -6,7 +6,7 @@
 /*   By: gsaiago <gsaiago@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 16:46:10 by gsaiago           #+#    #+#             */
-/*   Updated: 2022/11/10 20:02:17 by gsaiago          ###   ########.fr       */
+/*   Updated: 2022/11/10 21:14:56 by gsaiago          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ int	main(int argc, char **argv)
 		create_control(control, argv, 0);
 	else
 		create_control(control, argv, 1);
+	initialize_mutex_struct_thread(control, argv);
 	pthread_create(&control->vulture, NULL, &vulture, control);
 	pthread_detach(control->vulture);
-	initialize_mutex_struct_thread(control, argv);
 	while (i < control->nph)
 	{
 		pthread_join(control->thv[i], NULL);
