@@ -6,7 +6,7 @@
 /*   By: gsaiago <gsaiago@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 18:54:59 by gsaiago           #+#    #+#             */
-/*   Updated: 2022/11/10 19:40:23 by gsaiago          ###   ########.fr       */
+/*   Updated: 2022/11/15 18:34:12 by gsaiago          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,8 @@ void	create_control(t_control *control, char **av, int if_times_eat)
 	control->time_to_die = ft_atol(av[2]) * 1000;
 	control->last_meal_access = (pthread_mutex_t *)
 		ph_calloc(sizeof(pthread_mutex_t), control->nph + 1);
-	control->last_meal = (long unsigned int *)
-		ph_calloc(sizeof(long int), (control->nph + 1));
-	control->philov = (t_philo **)
-		ph_calloc(sizeof(t_philo *), control->nph + 1);
+	control->last_meal = ph_calloc(sizeof(long int), (control->nph + 1));
+	control->philov = ph_calloc(sizeof(t_philo *), control->nph + 1);
 	control->forkv = (pthread_mutex_t *)
 		ph_calloc(sizeof(pthread_mutex_t), control->nph + 1);
 	control->thv = (pthread_t *)
@@ -32,6 +30,9 @@ void	create_control(t_control *control, char **av, int if_times_eat)
 	control->fork_state = (int *)ph_calloc(sizeof(int), ft_atol(av[1]));
 	control->fork_state_access = (pthread_mutex_t *)
 		ph_calloc(sizeof(pthread_mutex_t), control->nph + 1);
+	control->vulture_return_access = (pthread_mutex_t *)
+		ph_calloc(sizeof(pthread_mutex_t), 1);
+	control->vulture_return = ph_calloc(sizeof(char), 1);
 	if (if_times_eat)
 		control->max_eat = ft_atol(av[5]);
 	else
@@ -75,6 +76,7 @@ void	initialize_mutex_struct_thread(t_control *control, char **av)
 		pthread_mutex_init(&control->fork_state_access[i], NULL);
 		pthread_mutex_init(&control->last_meal_access[i], NULL);
 	}
+	pthread_mutex_init(control->vulture_return_access, NULL);
 	pthread_mutex_init(control->stop_eating_access, NULL);
 	i = -1;
 	while (++i < control->nph)
@@ -85,5 +87,6 @@ void	initialize_mutex_struct_thread(t_control *control, char **av)
 		pthread_create(&control->thv[i], NULL,
 			&dine, control->philov[i]);
 	}
+	pthread_create(&control->vulture, NULL, &vulture, control);
 	return ;
 }

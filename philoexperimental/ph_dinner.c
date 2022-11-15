@@ -6,7 +6,7 @@
 /*   By: gsaiago <gsaiago@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 11:05:11 by gsaiago           #+#    #+#             */
-/*   Updated: 2022/11/10 21:49:37 by gsaiago          ###   ########.fr       */
+/*   Updated: 2022/11/14 19:29:36 by gsaiago          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,12 @@ int	add_meal(t_philo *philo)
 		return (0);
 	philo->times_eaten++;
 	if (philo->times_eaten >= philo->max_eat)
+	{
+		pthread_mutex_lock(&philo->last_meal_access[philo->phid - 1]);
+		philo->last_meal[philo->phid - 1] = 0;
+		pthread_mutex_unlock(&philo->last_meal_access[philo->phid - 1]);
 		return (1);
+	}
 	return (0);
 }
 

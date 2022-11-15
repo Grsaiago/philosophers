@@ -6,7 +6,7 @@
 /*   By: gsaiago <gsaiago@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 17:56:21 by gsaiago           #+#    #+#             */
-/*   Updated: 2022/11/10 19:08:17 by gsaiago          ###   ########.fr       */
+/*   Updated: 2022/11/15 18:37:17 by gsaiago          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ typedef struct s_philo
 	long unsigned int	*last_meal;
 	pthread_mutex_t		*last_meal_access;
 	pthread_mutex_t		*forkv;
+	char				*philo_state;
+	pthread_mutex_t		*philo_state_access;
 	struct timeval		tv;
 }	t_philo;
 
@@ -46,6 +48,8 @@ typedef struct s_control
 	int					nph;
 	int					time_to_die;
 	int					max_eat;
+	pthread_t			*thv;
+	t_philo				**philov;
 	int					*fork_state;
 	pthread_mutex_t		*fork_state_access;
 	long unsigned int	*last_meal;
@@ -53,8 +57,10 @@ typedef struct s_control
 	int					*stop_eating;
 	pthread_mutex_t		*stop_eating_access;
 	pthread_mutex_t		*forkv;
-	pthread_t			*thv;
-	t_philo				**philov;
+	char				*philo_state;
+	pthread_mutex_t		*philo_state_access;
+	pthread_mutex_t		*vulture_return_access;
+	char				*vulture_return;
 	pthread_t			vulture;
 	struct timeval		tv;
 }	t_control;
@@ -88,10 +94,12 @@ void		ph_unlock_fork(t_philo *philo, int n_fork);
 /* VULTURE */
 void		*vulture(void *ptr);
 int			stop_eating(t_control *control);
-int			if_dead(t_control *control, int i);
+int			check_philo_death(t_control *control, int i);
+int			check_vulture_return(t_control *control);
 /* EXIT FUNCTIONS */
 void		free_all(t_control *control);
-void		kill_threads(t_control	*control);
+void		kill_vulture(t_control *control);
+void		kill_mutexes(t_control	*control);
 void		exit_func(t_control *control);
 
 #endif
