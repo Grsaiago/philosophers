@@ -6,7 +6,7 @@
 #    By: gsaiago <gsaiago@student.42.rio>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/12 16:43:03 by gsaiago           #+#    #+#              #
-#    Updated: 2022/11/10 19:22:08 by gsaiago          ###   ########.fr        #
+#    Updated: 2022/11/16 13:52:47 by gsaiago          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ SRCS =	ph_main.c \
 		ph_initialize.c \
 		ph_dinner.c \
 		ph_think_eat_sleep.c \
+		ph_take_forks.c \
 		ph_exit.c \
 
 

@@ -6,7 +6,7 @@
 /*   By: gsaiago <gsaiago@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 17:56:21 by gsaiago           #+#    #+#             */
-/*   Updated: 2022/11/15 18:37:17 by gsaiago          ###   ########.fr       */
+/*   Updated: 2022/11/16 13:52:22 by gsaiago          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,8 @@ void		death_refresh(t_philo *philo);
 int			stop_execution(t_philo	*philo);
 int			trylock_fork(t_philo *philo, int n_fork);
 void		ph_unlock_fork(t_philo *philo, int n_fork);
+int			last_philo_fork_take(t_philo *philo);
+int			other_philo_fork_take(t_philo *philo);
 /* VULTURE */
 void		*vulture(void *ptr);
 int			stop_eating(t_control *control);
