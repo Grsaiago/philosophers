@@ -6,7 +6,7 @@
 /*   By: gsaiago <gsaiago@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:38:57 by gsaiago           #+#    #+#             */
-/*   Updated: 2022/11/08 23:02:22 by gsaiago          ###   ########.fr       */
+/*   Updated: 2022/11/14 19:34:55 by gsaiago          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	stop_eating(t_control *control)
 	long int	current_time;
 
 	i = 0;
-	if (control->max_eat <= 0)
+	if (control->max_eat < 0)
 		return (0);
 	while (i < control->nph)
 	{
