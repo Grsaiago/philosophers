@@ -6,7 +6,7 @@
 /*   By: gsaiago <gsaiago@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 08:29:22 by gsaiago           #+#    #+#             */
-/*   Updated: 2022/11/15 18:37:52 by gsaiago          ###   ########.fr       */
+/*   Updated: 2022/11/19 15:30:42 by gsaiago          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	exit_func(t_control *control)
 {
 	kill_vulture(control);
-	kill_mutexes(control);
+//	kill_mutexes(control);
 	free_all(control);
 	return ;
 }
