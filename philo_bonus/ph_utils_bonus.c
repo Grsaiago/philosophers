@@ -6,7 +6,7 @@
 /*   By: gsaiago <gsaiago@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 20:10:10 by gsaiago           #+#    #+#             */
-/*   Updated: 2022/11/03 21:12:57 by gsaiago          ###   ########.fr       */
+/*   Updated: 2022/11/19 15:26:02 by gsaiago          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ void	create_control(t_control *control, char **av, int times_eat)
 	sem_unlink("/forks_sem");
 	sem_unlink("/death_sem");
 	sem_unlink("/stout_sem");
-	sem_unlink("/times_eaten_sem");
 	control->nph = ft_atol(av[1]);
 	control->time_to_die = ft_atol(av[2]) * 1000;
 	control->time_to_eat = ft_atol(av[3]) * 1000;
