@@ -6,7 +6,7 @@
 /*   By: gsaiago <gsaiago@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:38:57 by gsaiago           #+#    #+#             */
-/*   Updated: 2023/02/14 20:41:23 by gsaiago          ###   ########.fr       */
+/*   Updated: 2023/02/14 23:03:41 by gsaiago          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	check_eaten_times(t_control *control)
 	i = 0;
 	if (!control->max_eat)
 		return (0);
-	while (i < control->max_eat)
+	while (i < control->nph)
 	{
 		pthread_mutex_lock(&control->times_eaten_access[i]);
 		if (control->times_eaten[i] < control->max_eat)
