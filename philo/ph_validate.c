@@ -6,7 +6,7 @@
 /*   By: gsaiago <gsaiago@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:35:05 by gsaiago           #+#    #+#             */
-/*   Updated: 2022/11/01 11:12:43 by gsaiago          ###   ########.fr       */
+/*   Updated: 2022/11/15 17:52:12 by gsaiago          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,11 @@ int	if_in_range(int ac, char **av)
 
 int	validate_args(int ac, char **av)
 {
+	if (!(ac == 5 || ac == 6))
+	{
+		printf("Error!\nNot enough/Too mmany args\n");
+		return (1);
+	}
 	if (if_number(ac, av))
 		return (1);
 	if (if_in_range(ac, av))

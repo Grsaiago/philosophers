@@ -6,7 +6,7 @@
 /*   By: gsaiago <gsaiago@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:38:57 by gsaiago           #+#    #+#             */
-/*   Updated: 2022/11/14 19:34:55 by gsaiago          ###   ########.fr       */
+/*   Updated: 2023/02/14 20:41:23 by gsaiago          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,29 +23,42 @@ void	*vulture(void *ptr)
 	{
 		if (i == control->nph)
 			i = 0;
-		if (stop_eating(control))
+		if (check_philo_death(control, i) || check_eaten_times(control))
 			return (NULL);
-		pthread_mutex_lock(&control->last_meal_access[i]);
-		if (if_dead(control, i))
-		{
-			pthread_mutex_unlock(&control->last_meal_access[i]);
-			break ;
-		}
-		pthread_mutex_unlock(&control->last_meal_access[i]);
 		i++;
 	}
 	return (NULL);
 }
 
-int	stop_eating(t_control *control)
+int	check_philo_death(t_control *control, int i)
 {
-	int			i;
+	long int	diff;
 	long int	current_time;
 
+	pthread_mutex_lock(&control->last_meal_access[i]);
+	current_time = get_time(1);
+	diff = current_time - control->last_meal[i];
+	if (diff > control->time_to_die && control->last_meal[i])
+	{
+		pthread_mutex_lock(control->stop_eating_access);
+		*control->stop_eating = 1;
+		pthread_mutex_unlock(control->stop_eating_access);
+		printf("%ld %d has died\n", get_time(1000), i + 1);
+		pthread_mutex_unlock(&control->last_meal_access[i]);
+		return (1);
+	}
+	pthread_mutex_unlock(&control->last_meal_access[i]);
+	return (0);
+}
+
+int	check_eaten_times(t_control *control)
+{
+	int	i;
+
 	i = 0;
-	if (control->max_eat < 0)
+	if (!control->max_eat)
 		return (0);
-	while (i < control->nph)
+	while (i < control->max_eat)
 	{
 		pthread_mutex_lock(&control->times_eaten_access[i]);
 		if (control->times_eaten[i] < control->max_eat)
@@ -56,23 +69,8 @@ int	stop_eating(t_control *control)
 		pthread_mutex_unlock(&control->times_eaten_access[i]);
 		i++;
 	}
-	current_time = get_time(&control->tv, 1000);
-	printf("%ld Everyone has eaten!\n", current_time);
+	pthread_mutex_lock(control->stop_eating_access);
+	*control->stop_eating = 1;
+	pthread_mutex_unlock(control->stop_eating_access);
 	return (1);
-}
-
-int	if_dead(t_control *control, int i)
-{
-	long int	diff;
-	long int	current_time;
-
-	current_time = get_time(&control->tv, 1);
-	diff = current_time - control->last_meal[i];
-	if (diff > control->time_to_die && (control->last_meal[i] != 0))
-	{
-		current_time = get_time(&control->tv, 1000);
-		printf("%ld %d has died\n", current_time, i + 1);
-		return (1);
-	}
-	return (0);
 }

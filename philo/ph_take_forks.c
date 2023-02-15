@@ -6,7 +6,7 @@
 /*   By: gsaiago <gsaiago@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 13:42:46 by gsaiago           #+#    #+#             */
-/*   Updated: 2022/11/16 13:51:33 by gsaiago          ###   ########.fr       */
+/*   Updated: 2023/02/14 21:26:03 by gsaiago          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 int	take_forks(t_philo *philo)
 {
-	if (philo->phid == philo->nph)
+	if (philo->is_even)
 	{
-		if (last_philo_fork_take(philo))
+		if (even_philo_fork_take(philo))
 			return (1);
 	}
 	else
 	{
-		if (other_philo_fork_take(philo))
+		if (odd_philo_fork_take(philo))
 			return (1);
 	}
 	return (0);
@@ -29,7 +29,7 @@ int	take_forks(t_philo *philo)
 
 void	return_forks(t_philo *philo)
 {
-	if (philo->phid == philo->nph)
+	if (philo->is_even)
 	{
 		ph_unlock_fork(philo, philo->prev_f);
 		ph_unlock_fork(philo, philo->next_f);
@@ -42,7 +42,7 @@ void	return_forks(t_philo *philo)
 	return ;
 }
 
-int	last_philo_fork_take(t_philo *philo)
+int	even_philo_fork_take(t_philo *philo)
 {
 	while (42)
 	{
@@ -61,7 +61,7 @@ int	last_philo_fork_take(t_philo *philo)
 	return (0);
 }
 
-int	other_philo_fork_take(t_philo *philo)
+int	odd_philo_fork_take(t_philo *philo)
 {
 	while (42)
 	{

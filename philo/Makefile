@@ -6,7 +6,7 @@
 #    By: gsaiago <gsaiago@student.42.rio>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/12 16:43:03 by gsaiago           #+#    #+#              #
-#    Updated: 2022/11/01 11:10:37 by gsaiago          ###   ########.fr        #
+#    Updated: 2022/11/16 13:52:47 by gsaiago          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,9 +21,12 @@ SRCS =	ph_main.c \
 		ph_atol.c \
 		ph_validate.c \
 		ph_vulture.c \
-		ph_thread.c \
+		ph_initialize.c \
 		ph_dinner.c \
+		ph_think_eat_sleep.c \
+		ph_take_forks.c \
 		ph_exit.c \
+
 
 COLOR_GREEN=\033[0;32m
 COLOR_RED=\033[0;31m

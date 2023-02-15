@@ -6,7 +6,7 @@
 /*   By: gsaiago <gsaiago@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 21:20:48 by gsaiago           #+#    #+#             */
-/*   Updated: 2022/11/16 13:52:27 by gsaiago          ###   ########.fr       */
+/*   Updated: 2023/02/14 21:40:32 by gsaiago          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,27 @@
 
 int	ph_think(t_philo *philo)
 {
-	if (stop_execution(philo))
-		return (1);
-	printf("%ld %d is thinking\n", get_time(&philo->tv, 1000), philo->phid);
+	printf("%ld %d is thinking\n", get_time(1000), philo->phid);
 	return (0);
 }
 
 int	ph_eat(t_philo *philo)
 {
-	if (stop_execution(philo))
-		return (1);
 	if (take_forks(philo))
 		return (1);
 	death_refresh(philo);
-	printf("%ld %d is eating\n", get_time(&philo->tv, 1000), philo->phid);
-	usleep(philo->time_to_eat);
-	return_forks(philo);
-	if (add_meal(philo))
+	printf("%ld %d is eating\n", get_time(1000), philo->phid);
+	if(smart_sleep(philo, philo->time_to_eat))
 		return (1);
+	return_forks(philo);
+	add_meal(philo);
 	return (0);
 }
 
 int	ph_sleep(t_philo *philo)
 {
-	if (stop_execution(philo))
+	printf("%ld %d is sleeping\n", get_time(1000), philo->phid);
+	if(smart_sleep(philo, philo->time_to_sleep))
 		return (1);
-	printf("%ld %d is sleeping\n", get_time(&philo->tv, 1000), philo->phid);
-	usleep(philo->time_to_sleep);
 	return (0);
 }
