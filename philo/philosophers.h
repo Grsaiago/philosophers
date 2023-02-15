@@ -6,7 +6,7 @@
 /*   By: gsaiago <gsaiago@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 17:56:21 by gsaiago           #+#    #+#             */
-/*   Updated: 2023/02/14 21:39:15 by gsaiago          ###   ########.fr       */
+/*   Updated: 2023/02/14 21:57:19 by gsaiago          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,16 @@
 # include <limits.h>
 # include <string.h>
 # include <sys/time.h>
+# include <stdint.h>
 
 typedef struct s_philo
 {
-	int					nph;
-	int					phid;
-	int					phindex;
-	int					is_even;
-	int					prev_f;
-	int					next_f;
+	uint8_t				nph;
+	uint8_t				phid;
+	uint8_t				phindex;
+	uint8_t				is_even;
+	uint8_t				prev_f;
+	uint8_t				next_f;
 	int					max_eat;
 	int					time_to_eat;
 	int					time_to_sleep;
@@ -44,7 +45,7 @@ typedef struct s_philo
 
 typedef struct s_control
 {
-	int					nph;
+	uint8_t				nph;
 	int					time_to_die;
 	int					max_eat;
 	pthread_t			*thv;
