@@ -6,7 +6,7 @@
 /*   By: gsaiago <gsaiago@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:38:57 by gsaiago           #+#    #+#             */
-/*   Updated: 2023/02/14 23:03:41 by gsaiago          ###   ########.fr       */
+/*   Updated: 2023/02/17 12:45:26 by gsaiago          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,9 @@ void	*vulture(void *ptr)
 
 int	check_philo_death(t_control *control, int i)
 {
-	long int	diff;
-	long int	current_time;
-
 	pthread_mutex_lock(&control->last_meal_access[i]);
-	current_time = get_time(1);
-	diff = current_time - control->last_meal[i];
-	if (diff > control->time_to_die && control->last_meal[i])
+	if (control->last_meal[i] &&
+		(get_time(1) - control->last_meal[i] > control->time_to_die))
 	{
 		pthread_mutex_lock(control->stop_eating_access);
 		*control->stop_eating = 1;

@@ -6,7 +6,7 @@
 /*   By: gsaiago <gsaiago@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 17:56:21 by gsaiago           #+#    #+#             */
-/*   Updated: 2023/02/14 21:57:19 by gsaiago          ###   ########.fr       */
+/*   Updated: 2023/02/17 12:43:24 by gsaiago          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ typedef struct s_philo
 typedef struct s_control
 {
 	uint8_t				nph;
-	int					time_to_die;
+	long unsigned int 	time_to_die;
 	int					max_eat;
 	pthread_t			*thv;
 	t_philo				**philov;
