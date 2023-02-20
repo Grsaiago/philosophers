@@ -7,7 +7,7 @@
   42 Cursus' Philosophers
 
 </h1>
-<p>Think, Spaghetti, Sleep, repeat. This project is about learning how threads, shared memory, mutexes, and deadlocks work by precisely timing a group of philosophers on when to pick up forks and eat spaghetti without dying from hunger.</p>
+<p>Think, Spaghetti, Sleep, repeat. This <a href="https://42.rio/">42rio</a> project is about learning how threads, shared memory, mutexes, and deadlocks work by precisely timing a group of philosophers on when to pick up forks and eat spaghetti without dying from hunger.</p>
 
 ### Mandatory Install
 Where the multithreaded magic happens 😄
@@ -42,6 +42,10 @@ git clone https://github.com/Grsaiago/philosophers.git && cd philosophers && cd 
 ./philo 4 200 210 200 // One philosopher dies
 ```
 
+## Tips for the project
+- First and foremost, the multithread chapter of The Linux Programming Interface is a great starter!
+- <a href ="https://man7.org/linux/man-pages/man7/pthreads.7.html"> Pthread's man pages</a> (RTFM)
+- <a href="https://www.youtube.com/watch?v=d9s_d28yJq0&list=PLfqABt5AS4FmuQf70psXrsMLEDQXNkLq2">Codevault's playlist on multithread</a> is a GEM 
 ## ✨Author✨
 
 🧔 **Gabriel Saiago**
