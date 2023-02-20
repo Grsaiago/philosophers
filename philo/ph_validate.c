@@ -6,7 +6,7 @@
 /*   By: gsaiago <gsaiago@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 16:35:05 by gsaiago           #+#    #+#             */
-/*   Updated: 2022/11/15 17:52:12 by gsaiago          ###   ########.fr       */
+/*   Updated: 2023/02/18 18:50:43 by gsaiago          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	validate_args(int ac, char **av)
 {
 	if (!(ac == 5 || ac == 6))
 	{
-		printf("Error!\nNot enough/Too mmany args\n");
+		fprintf(stderr, "Ussage: %s <n_of_philos> <die_time> <eat_time> <sleep_time>\n", av[0]);
 		return (1);
 	}
 	if (if_number(ac, av))

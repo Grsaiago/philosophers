@@ -6,7 +6,7 @@
 /*   By: gsaiago <gsaiago@student.42.rio>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 16:46:10 by gsaiago           #+#    #+#             */
-/*   Updated: 2023/02/16 01:18:05 by gsaiago          ###   ########.fr       */
+/*   Updated: 2023/02/18 18:48:38 by gsaiago          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	main(int argc, char **argv)
 	control = &(t_control){0};
 	i = 0;
 	if (validate_args(argc, argv))
-		return (0);
+		return (EXIT_FAILURE);
 	if (argc == 5)
 		create_control(control, argv, 0);
 	else
