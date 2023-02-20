@@ -44,10 +44,10 @@ git clone https://github.com/Grsaiago/philosophers.git && cd philosophers && cd 
 
 ## Tips for the project
 - First and foremost, the multithread chapter of The Linux Programming Interface is a great starter!
-- <a href ="https://man7.org/linux/man-pages/man7/pthreads.7.html"> Pthread's man pages</a> (RTFM)
-- <a href="https://www.youtube.com/watch?v=d9s_d28yJq0&list=PLfqABt5AS4FmuQf70psXrsMLEDQXNkLq2">Codevault's playlist on multithread</a> is a GEM 
+- <a href="https://man7.org/linux/man-pages/man7/pthreads.7.html" target="_blank"> Pthread's man pages</a> (RTFM)
+- <a href="https://www.youtube.com/watch?v=d9s_d28yJq0&list=PLfqABt5AS4FmuQf70psXrsMLEDQXNkLq2" target="_blank">Codevault's playlist on multithread</a> is a GEM 
 ## ✨Author✨
 
 🧔 **Gabriel Saiago**
-- Github: [@Grsaiago](https://github.com/Grsaiago)
-- LinkedIn: [@grsaiago](https://www.linkedin.com/in/grsaiago/)
+- Github: <a href="https://github.com/Grsaiago" target="_blank">@Grsaiago</a>
+- LinkedIn: <a href="https://www.linkedin.com/in/grsaiago/" target="_blank">@grsaiago</a>
