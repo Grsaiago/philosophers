@@ -9,22 +9,28 @@
 </h1>
 <p>Think, Spaghetti, Sleep, repeat. This <a href="https://42.rio/">42rio</a> project is about learning how threads, shared memory, mutexes, and deadlocks work by precisely timing a group of philosophers on when to pick up forks and eat spaghetti without dying from hunger.</p>
 
-### Mandatory Install
+## Install
+### Mandatory 
 Where the multithreaded magic happens 😄
 ```sh
-git clone https://github.com/Grsaiago/philosophers.git && cd philosophers && cd philo && make
+$> git clone https://github.com/Grsaiago/philosophers.git && cd philosophers && cd philo && make
 ```
 
-### Bonus Install
+### Bonus 
 The magic still happens, but this time with ✨UNIX Semaphores✨
 ```sh
-git clone https://github.com/Grsaiago/philosophers.git && cd philosophers && cd philo_bonus && make
+$> git clone https://github.com/Grsaiago/philosophers.git && cd philosophers && cd philo_bonus && make
 ```
+<br>
 
+`make` supports the following flags for both mandatory and bonus part.
+- `all` or simply `make` -> Compiles everything, creates a debug dir, and gets the program ready to go!
+- `make clean` -> removes the executable and the debug dir.
+- `make re` -> removes the executable, the debug dir and recompiles everything.
 ### Usage
 
 ```sh
-./philo <num_of_philos> <time_to_die> <time_to_eat> <time_to_sleep> [num_times_must_eat]
+$> ./philo <num_of_philos> <time_to_die> <time_to_eat> <time_to_sleep> [num_times_must_eat]
 ```
 
 ### Examples
