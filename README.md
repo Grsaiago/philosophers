@@ -27,13 +27,13 @@ $> git clone https://github.com/Grsaiago/philosophers.git && cd philosophers && 
 - `all` or simply `make` -> Compiles everything, creates a debug dir, and gets the program ready to go!
 - `make clean` -> removes the executable and the debug dir.
 - `make re` -> removes the executable, the debug dir and recompiles everything.
-### Usage
+## Usage
 
 ```sh
 $> ./philo <num_of_philos> <time_to_die> <time_to_eat> <time_to_sleep> [num_times_must_eat]
 ```
 
-### Examples
+## Examples
 
 ```c
 ./philo 1 800 200 200 // Not enough forks, one philo tries to eat but dies out 😥
