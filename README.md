@@ -7,7 +7,7 @@
   42 Cursus' Philosophers
 
 </h1>
-<p>Think, Spaghetti, Sleep, repeat. This <a href="https://42.rio/">42rio</a> project is about learning how threads, shared memory, mutexes, and deadlocks work by precisely timing a group of philosophers on when to pick up forks and eat spaghetti without dying from hunger.</p>
+<p align="center">Think, Spaghetti, Sleep, repeat. This <a href="https://42.rio/">42rio</a> project is about learning how threads, shared memory, mutexes, and deadlocks work by precisely timing a group of philosophers on when to pick up forks and eat spaghetti without dying from hunger.</p>
 
 ## Install
 ### Mandatory 
